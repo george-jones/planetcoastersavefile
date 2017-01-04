@@ -74,5 +74,8 @@ class PlanetCoasterSaveFile():
         f_out.write(compressor.flush(zlib.Z_FINISH))
         f_out.close()
 
-    def set_byte(self, pos, b):
-        self.body[pos] = b
+    def set_byte(self, value, abspos=None, bodypos=None):
+        if abspos is not None:
+            self.body[bodypos - HEADER_LEN] = b
+        elif bodypos is not None:
+            self.body[bodypos] = b
