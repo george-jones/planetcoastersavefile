@@ -78,4 +78,37 @@ class PlanetCoasterSaveFile():
         if abspos is not None:
             self.body[bodypos - HEADER_LEN] = b
         elif bodypos is not None:
-            self.body[bodypos] = b
+            self.body[bodypos] = value
+
+    def find_bytes(self, find, start=0):
+        """Find first exact match of array of bytes in the body.
+        Returns offset relative to the start of the body.
+
+        """
+        length = len(find)
+        for i in range(start, self.header['body_len']):
+            if self.body[i : i+length] == find:
+                yield i
+
+    def replace_bytes(self, find, replace=None, all=False):
+        """Change the first (or all) exact matching sequences of bytes in the
+        body with another sequence.  They must be the same length.  If replace is
+        None, just return the match.
+
+        """
+        matched = 0
+        length = len(find)
+        if replace is not None:
+            assert(length == len(replace))
+
+        for m in self.find_bytes(find):
+            matched += 1
+            if replace is not None:
+                for j in range(0, length):
+                    self.set_byte(replace[j], bodypos=m+j)
+            if all is False:
+                break
+        return matched
+
+
+
