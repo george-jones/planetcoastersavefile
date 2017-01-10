@@ -6,7 +6,7 @@ Utilities for working with save game files for the awesome game Planet Coaster. 
 - pip install crcmod
 
 ## Disclaimers
-- This is just a start.  Don't expect it to do anything useful yet!
+- This is just a start.  So far, all it does is easily create uncompressed versions of the save files.
 - This code might eat your save files and burn your house down, be careful!
 - I am in no way affilliated with Frontier Developments and this code is not in any way endorsed by them.
 
