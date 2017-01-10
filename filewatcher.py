@@ -14,7 +14,7 @@ class FileWatcher():
 
     def file_peek(self):
         s = os.stat(self.filename)
-        if s.st_mtime != self.last_mtime:            
-            if self.last_mtime != 0:
-                self.on_update(self.filename)
+        if s.st_mtime != self.last_mtime:
+            self.on_update(self.filename, s.st_mtime)
             self.last_mtime = s.st_mtime
+            
